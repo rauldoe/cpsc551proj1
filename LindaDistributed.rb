@@ -7,9 +7,8 @@ module LindaDistributed
 
         @@Port = 4000
         @@Url = "druby://localhost:#{@@Port}"
-
-        @@TopicPort = 3000
-        @@TopicUrl = "druby://localhost:#{@@TopicPort}"
+        
+        @@TopicListKey = "__topic_list__"
 
         @OList = [:read, :write, :take]
         @@OperationLookup = { 
@@ -31,6 +30,9 @@ module LindaDistributed
             @@OperationLookup
         end
 
+        def self.TopicListKey
+            @@TopicListKey
+        end
     end
 
     class Server
@@ -39,7 +41,15 @@ module LindaDistributed
             ts = Rinda::TupleSpace.new
             DRb.start_service(url, ts)
             puts "Rinda listening on #{DRb.uri}..."
+            initData()
             DRb.thread.join
+        end
+
+        def initData
+            # initialize the topic list
+            ts = DRbObject.new(nil, Common.Url)
+            ts.send(:write, [Common.TopicListKey, []])
+            puts "setting " + Common.TopicListKey
         end
     end
 

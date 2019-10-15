@@ -1,5 +1,5 @@
 
-import DistributedOperation
+from DistributedOperation import DistributedOperation
 
-class Arithmetic(DistributedOperation.DistributedOperation):
+class Arithmetic(DistributedOperation):
     pass
