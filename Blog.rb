@@ -1,6 +1,8 @@
 require "./XMLRPCLinda"
+require "./ConverterModule"
 
 include XMLRPCLinda
+include ConverterModule
 
 class Blog
     @client = nil
@@ -10,12 +12,15 @@ class Blog
     end
 
     def _in(t)
-        @client.sendMessage(Common.getFullyNamedMethod(:take), t)
+        converted = Converter.tupleToXMLRPCTuple(t)
+        @client.sendMessage(Common.getFullyNamedMethod(:take), converted)
     end
     def _rd(t)
-        @client.sendMessage(Common.getFullyNamedMethod(:read), t)
+        converted = Converter.tupleToXMLRPCTuple(t)
+        @client.sendMessage(Common.getFullyNamedMethod(:read), converted)
     end
     def _out(t)
-        @client.sendMessage(Common.getFullyNamedMethod(:write), t)
+        converted = Converter.tupleToXMLRPCTuple(t)
+        @client.sendMessage(Common.getFullyNamedMethod(:write), converted)
     end
 end

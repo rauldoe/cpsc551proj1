@@ -5,5 +5,14 @@ import Blog
 
 blog = Blog.Blog()
 
-print(blog._out(("alice","gtcn","This graph theory stuff is not easy")))
-print(blog._out(("alice","distsys","I like systems more than graphs")))
+poster = "alice"
+
+topic = "gtcn"
+messageText = "This graph theory stuff is not easy"
+blog._out((poster, topic, messageText))
+print("topic: " + topic + ", message: " + messageText)
+
+topic = "distsys"
+messageText = "I like systems more than graphs"
+blog._out((poster, topic, messageText))
+print("topic: " + topic + ", message: " + messageText)

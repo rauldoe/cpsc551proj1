@@ -18,17 +18,23 @@ end
 
 blog = Blog.new()
 
-t1 = blog._rd(("bob","distsys",str))
-puts(t1)
+stringClass = Module.const_get('String')
 
-t2 = blog._rd(("alice","gtcn",str))
-puts(t2)
+poster = "bob"
+topic = "distsys"
+t1 = blog._rd([poster, topic, stringClass])
+puts "reading poster: " + poster + ", topic: " + topic
+puts "got message: " + t1["output"][2]
 
 poster = "alice"
 topic = "gtcn"
-messageText = nil
-t = [poster, topic, messageText]
-puts blog._rd(t)
+t2 = blog._rd([poster, topic, stringClass])
+puts "reading poster: " + poster + ", topic: " + topic
+puts "got message: " + t2["output"][2]
 
-t3 = blog._rd(("bob","gtcn",str))
-puts(t1)
+poster = "bob"
+topic = "gtcn"
+messageText = stringClass
+t = [poster, topic, messageText]
+puts "reading poster: " + poster + ", topic: " + topic
+puts "got message: " + t1["output"][2]

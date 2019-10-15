@@ -5,11 +5,20 @@ import Blog
 
 blog = Blog.Blog()
 
-t1 = blog._rd(("bob","distsys",str))
-print(t1)
+poster = "bob"
+topic = "distsys"
+t1 = blog._rd((poster, topic, str))
+print("reading poster: " + poster + ", topic: " + topic)
+print("got message: " + t1["output"][2])
 
-t2 = blog._rd(("alice","gtcn",str))
-print(t2)
+poster = "alice"
+topic = "gtcn"
+t2 = blog._rd((poster, topic, str))
+print("reading poster: " + poster + ", topic: " + topic)
+print("got message: " + t2["output"][2])
 
-t3 = blog._rd(("bob","gtcn",str))
-print(t3)
+poster = "bob"
+topic = "gtcn"
+t3 = blog._rd((poster, topic, str))
+print("reading poster: " + poster + ", topic: " + topic)
+print("got message: " + t3["output"][2])

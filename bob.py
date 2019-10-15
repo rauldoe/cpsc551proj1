@@ -5,6 +5,19 @@ import Blog
 
 blog = Blog.Blog()
 
-print(blog._out(("bob","distsys","I am studying chap 2")))
-print(blog._out(("bob","distsys","The linda example’s pretty simple")))
-print(blog._out(("bob","gtcn","Cool book!")))
+poster = "bob"
+
+topic = "distsys"
+messageText = "I am studying chap 2"
+blog._out((poster, topic, messageText))
+print("topic: " + topic + ", message: " + messageText)
+
+topic = "distsys"
+messageText = "The linda example’s pretty simple"
+blog._out((poster, topic, messageText))
+print("topic: " + topic + ", message: " + messageText)
+
+topic = "gtcn"
+messageText = "Cool book"
+blog._out((poster, topic, messageText))
+print("topic: " + topic + ", message: " + messageText)

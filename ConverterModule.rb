@@ -31,6 +31,45 @@ module ConverterModule
             converted
         end
 
+        def self.tupleToXMLRPCTuple(tupleItem)
+            convertedList = []
+            for i in tupleItem
+                convertedList.push(itemToXMLRPCItem(i))
+            end
+
+            convertedList
+        end
+
+        def self.itemToXMLRPCItem(item)
+            converted = item
+
+            stringClass = Module.const_get('String')
+            numericClass = Module.const_get('Numeric')
+            hashClass = Module.const_get('Hash')
+            regexpClass = Module.const_get('Regexp')
+            rangeClass = Module.const_get('Range')
+
+            if (converted.is_a?(stringClass))
+                converted = item
+            elsif (converted.is_a?(numericClass))
+                converted = item
+            elsif (converted.class == Symbol)
+                converted = { "symbol" => converted.to_s }
+            elsif (converted == stringClass)
+                converted = { "class" => "String" }
+            elsif (converted == numericClass)
+                converted = { "class" => "Numeric" }
+            elsif (converted.is_a?(regexpClass))
+                converted = { "regexp" => converted.source }
+            elsif (converted.is_a?(rangeClass))
+                converted = { "from" => converted.first, "to" => converted.last }
+            else
+                converted = item
+            end
+
+            converted
+        end
+
         def self.getName(hash)
             keys = hash.keys
             name  = nil
