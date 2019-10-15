@@ -1,6 +1,7 @@
 
 require "rinda/tuplespace"
 require "rinda/rinda"
+require "./Message"
 
 module LindaDistributed
     class Common
@@ -43,7 +44,32 @@ module LindaDistributed
         end
     end
 
-    class Client
+    class Client2
+        
+        @url = nil
+        @ts = nil
+
+        def initialize(url)
+            @url = url
+            @ts = DRbObject.new(nil, url)
+        end
+
+        def sendMessage(method, topic, messageObject)
+            
+            tuple = toTuple(method, topic, messageObject)
+
+            puts "method: #{method} tuple: #{tuple}"
+
+            retVal = @ts.send(method, tuple)
+        end
+
+        def toTuple(method, topic, messageObject)
+            tuple = (method == :write) ? [messageObject.topic, messageObject.poster, messageObject.messageText] : [topic, nil, nil]
+        end
+
+    end
+
+    class Client1
         
         @url = nil
         @ts = nil
