@@ -1,5 +1,5 @@
 
-import DistributedOperation
+from DistributedOperation import DistributedOperation
 
-class Blog(DistributedOperation.DistributedOperation):
+class Blog(DistributedOperation):
     pass
